@@ -1,18 +1,23 @@
 class RingBuffer:
     def __init__(self, capacity):
-        self.capacity = capacity
-        self.storage = []
-        self.oldest = 0
+        self.capacity = capacity 
+        self.current = 0
+        self.storage = [None] * capacity
 
+    # added function to be able to append data into ringbuffer
     def append(self, item):
-        if len(self.storage) < self.capacity:
-           self.storage.append(item)
-        else:
-            self.storage[self.oldest] = item
-            if self.oldest < len(self.storage) - 1:
-                self.oldest += 1
-            else:
-                self.oldest = 0
+        self.storage[self.current] = item
 
+        if self.current < self.capacity - 1:
+            self.current += 1
+        else:
+            self.current = 0
+
+    # function to return data
     def get(self):
-        return self.storage
+        items = []
+        for i in self.storage:
+            if i is not None:
+                items.append(i)
+        print(items)
+        return items 
