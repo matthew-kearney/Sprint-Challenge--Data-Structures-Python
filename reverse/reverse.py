@@ -39,4 +39,19 @@ class LinkedList:
         return False
 
     def reverse_list(self, node, prev):
-        pass
+        # for node empty
+        if node is None:  
+             return
+
+        # to get to end of the SLL
+        if node.get_next() is None:
+            # set tail to head of RL
+            self.head = node 
+            return
+
+        # RL by converting current node with pervious node (recursive)
+        self.reverse_list(node.get_next(), node)
+        # set value of the second value in orginal list to be the second to last in new node
+        node.get_next().set_next(node)
+        # set next value to be none on new tail
+        node.set_next(None) 
